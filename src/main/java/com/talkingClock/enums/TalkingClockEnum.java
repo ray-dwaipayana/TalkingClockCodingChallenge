@@ -6,43 +6,50 @@ import lombok.ToString;
 
 import java.util.Arrays;
 
-@Getter
 public enum TalkingClockEnum {
     ZERO(0, ""),
-    ONE(1, "one"),
-    TWO(2, "two"),
-    THREE(3, "three"),
-    FOUR(4, "four"),
-    FIVE(5, "five"),
-    SIX(6, "six"),
-    SEVEN(7, "seven"),
-    EIGHT(8, "eight"),
-    NINE(9, "nine"),
-    TEN(10, "ten"),
-    ELEVEN(11, "eleven"),
-    TWELVE(12, "twelve"),
-    THIRTEEN(13, "thirteen"),
-    FOURTEEN(14, "fourteen"),
-    FIFTEEN(15, "quarter"),
-    SIXTEEN(16, "sixteen"),
-    SEVENTEEN(17, "seventeen"),
-    EIGHTEEN(18, "eighteen"),
-    NINETEEN(19, "nineteen"),
-    TWENTY(20, "twenty"),
-    TWENTYONE(21, "twenty one"),
-    TWENTYTWO(22, "twenty two"),
-    TWENTYTHREE(23, "twenty three"),
-    TWENTYFOUR(24, "twenty four"),
-    TWENTYFIVE(25, "twenty five"),
-    TWENTYSIX(26, "twenty six"),
-    TWENTYSEVEN(27, "twenty seven"),
-    TWENTYEIGHT(28, "twenty eight"),
-    TWENTYNINE(29, "twenty nine"),
-    THIRTY(30, "half");
+    ONE(1, "One"),
+    TWO(2, "Two"),
+    THREE(3, "Three"),
+    FOUR(4, "Four"),
+    FIVE(5, "Five"),
+    SIX(6, "Six"),
+    SEVEN(7, "Seven"),
+    EIGHT(8, "Eight"),
+    NINE(9, "Nine"),
+    TEN(10, "Ten"),
+    ELEVEN(11, "Eleven"),
+    TWELVE(12, "Twelve"),
+    THIRTEEN(13, "Thirteen"),
+    FOURTEEN(14, "Fourteen"),
+    FIFTEEN(15, "Quarter"),
+    SIXTEEN(16, "Sixteen"),
+    SEVENTEEN(17, "Seventeen"),
+    EIGHTEEN(18, "Eighteen"),
+    NINETEEN(19, "Nineteen"),
+    TWENTY(20, "Twenty"),
+    TWENTYONE(21, "Twenty One"),
+    TWENTYTWO(22, "Twenty Two"),
+    TWENTYTHREE(23, "Twenty Three"),
+    TWENTYFOUR(24, "Twenty Four"),
+    TWENTYFIVE(25, "Twenty Five"),
+    TWENTYSIX(26, "Twenty Six"),
+    TWENTYSEVEN(27, "Twenty Seven"),
+    TWENTYEIGHT(28, "Twenty Eight"),
+    TWENTYNINE(29, "Twenty Nine"),
+    THIRTY(30, "Half");
 
 
     private int value;
     private String text;
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getText() {
+        return text;
+    }
 
     TalkingClockEnum(int value, String text) {
         this.value = value;
@@ -64,12 +71,11 @@ public enum TalkingClockEnum {
 
      */
     public static String toText(int number) {
-        for (TalkingClockEnum talkingClockEnum : TalkingClockEnum.values()) {
-            if (talkingClockEnum.value == number) {
-                return talkingClockEnum.getText();
-            }
-        }
-        throw new IllegalArgumentException("No enum constant with number " + number);
+        return Arrays.stream(values())
+                .filter(value -> value.value == number)
+                .map(TalkingClockEnum::getText)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No enum constant with number " + number));
     }
 }
 

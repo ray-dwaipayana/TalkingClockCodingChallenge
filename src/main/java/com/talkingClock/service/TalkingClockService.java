@@ -1,6 +1,5 @@
 package com.talkingClock.service;
 
-import com.talkingClock.constants.TalkingClockConstants;
 import com.talkingClock.enums.TalkingClockEnum;
 import com.talkingClock.exception.InvalidTimeException;
 import com.talkingClock.utils.TalkingClockUtil;
@@ -10,7 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class TalkingClockService implements Clock{
 
-    TalkingClockConstants talkingClockConstants = new TalkingClockConstants();
+    private static final String SPACE = " ";
+    private static final String OCLOCK = "o'Clock";
+    private static final String PAST = "past";
+    private static final String TO = "to";
 
     @Override
     public String convertTimeToWords(String time) throws InvalidTimeException {
@@ -39,17 +41,17 @@ public class TalkingClockService implements Clock{
                 }
                 // Human Friendly Text creation
                 if (min == 0) {
-                    timeInWords.append(talkingClockConstants.getOClock());
+                    timeInWords.append(OCLOCK);
                     hourInWords.append(TalkingClockEnum.toText(hour));
-                    hourInWords.append(talkingClockConstants.getSpace());
+                    hourInWords.append(SPACE);
                     finalOutput = hourInWords.append(timeInWords);
                 } else if (min < 31) {
                     timeInWords.append(TalkingClockEnum.toText(min));
                     hourInWords.append(TalkingClockEnum.toText(hour));
                     finalOutput.append(timeInWords);
-                    finalOutput.append(talkingClockConstants.getSpace());
-                    finalOutput.append(talkingClockConstants.getPast());
-                    finalOutput.append(talkingClockConstants.getSpace());
+                    finalOutput.append(SPACE);
+                    finalOutput.append(PAST);
+                    finalOutput.append(SPACE);
                     finalOutput.append(hourInWords);
                 } else  {
                     min = 60 - min;
@@ -60,9 +62,9 @@ public class TalkingClockService implements Clock{
                     hourInWords.append(TalkingClockEnum.toText(hour+1));
                     timeInWords.append(TalkingClockEnum.toText(min));
                     finalOutput.append(timeInWords);
-                    finalOutput.append(talkingClockConstants.getSpace());
-                    finalOutput.append(talkingClockConstants.getTo());
-                    finalOutput.append(talkingClockConstants.getSpace());
+                    finalOutput.append(SPACE);
+                    finalOutput.append(TO);
+                    finalOutput.append(SPACE);
                     finalOutput.append(hourInWords);
 
                 }
