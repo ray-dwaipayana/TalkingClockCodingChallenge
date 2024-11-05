@@ -25,6 +25,12 @@ public class TalkingClockServiceTest {
         return Stream.of(
                 Arguments.of("10:00","ten o'clock"),
                 Arguments.of("05:15","quarter past five"),
+                Arguments.of("10:50","ten to eleven"),
+                Arguments.of("00:00","twelve o'clock"),
+                Arguments.of("17:15","quarter past five"),
+                Arguments.of("12:50","ten to one"),
+                Arguments.of("23:59","one to twelve"),
+                Arguments.of("08:30","half past eight"),
                 Arguments.of("10:50","ten to eleven")
         );
 

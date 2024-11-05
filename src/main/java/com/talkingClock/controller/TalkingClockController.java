@@ -10,26 +10,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.DateTimeException;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 @RestController
 public class TalkingClockController {
 
 
     @Autowired
     TalkingClockService talkingClockService;
-
+    String currentTime;
 
     @GetMapping ("/talking-clock")
-    public Response getTime(@RequestParam(name="time",required = false) String time) throws InvalidTimeException {
-        if (time != null)
-        {
+    public Response getTime(@RequestParam(name="time",required = false) String time)  {
 
-            return Response.builder().value(talkingClockService.convertTimeToWords(time)).build();
+        try {
+            if (time != null) {
+                return Response.builder().value(talkingClockService.convertTimeToWords(time)).build();
+            } else {
+                currentTime = String.valueOf(LocalTime.now());
+                String[] timeParts = currentTime.split(":");
+                String hours = timeParts[0];
+                String min = timeParts[1];
+                currentTime = hours + ":" + min;
+                return Response.builder().value(talkingClockService.convertTimeToWords(currentTime)).build();
+            }
+        } catch (DateTimeException dateTimeException) {
+            throw new InvalidTimeException("Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59).");
         }
-        else
-        {
-            return Response.builder().value(talkingClockService.convertTimeToWords("00:00")).build();
-        }
-
     }
+
+
 
 }

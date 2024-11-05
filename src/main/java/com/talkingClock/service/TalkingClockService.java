@@ -28,6 +28,16 @@ public class TalkingClockService implements Clock{
 
         try {
             if ((hour < 25 && hour > -1) && (min < 60 && min > -1)) {
+                //hour conversion
+                if(hour > 12)
+                {
+                    hour = hour-12;
+                } else if (hour == 0) {
+
+                    hour = hour + 12;
+
+                }
+                // Human Friendly Text creation
                 if (min == 0) {
                     timeInWords.append(talkingClockConstants.getOClock());
                     hourInWords.append(TalkingClockEnum.toText(hour));
@@ -43,6 +53,10 @@ public class TalkingClockService implements Clock{
                     finalOutput.append(hourInWords);
                 } else  {
                     min = 60 - min;
+                    if(hour == 12)
+                    {
+                        hour = 0;
+                    }
                     hourInWords.append(TalkingClockEnum.toText(hour+1));
                     timeInWords.append(TalkingClockEnum.toText(min));
                     finalOutput.append(timeInWords);

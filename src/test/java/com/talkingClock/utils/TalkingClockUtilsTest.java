@@ -18,7 +18,7 @@ public class TalkingClockUtilsTest {
     @Test
     public void validateTimeTestInvalid() {
         boolean timeCheck = false;
-        timeCheck = TalkingClockUtil.validateTime("44:59");
+        timeCheck = TalkingClockUtil.validateTime("1:43");
         assertEquals(false, timeCheck);
     }
 

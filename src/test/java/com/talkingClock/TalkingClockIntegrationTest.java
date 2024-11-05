@@ -1,6 +1,8 @@
 package com.talkingClock;
 
 import com.talkingClock.TalkingClockApplication;
+import com.talkingClock.models.Response;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,6 +19,7 @@ import com.talkingClock.models.ErrorResponse;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /***
@@ -49,6 +52,24 @@ class TalkingClockIntegrationTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedOutput, response.getBody());
     }
+
+    @Test
+    void testTalkingClockNoArguments()
+    {
+        String url = createURLWithPort("/talking-clock");
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        // Verify that the response body is not null and contains a message
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+
+    }
+
+
+
+
+
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
     }
@@ -59,7 +80,15 @@ class TalkingClockIntegrationTest {
                 Arguments.of("11:22","{\"value\":\"twenty two past eleven\"}"),
                 Arguments.of("03:45","{\"value\":\"quarter to four\"}"),
                 Arguments.of("11:00","{\"value\":\"eleven o'clock\"}"),
-                Arguments.of("06:30","{\"value\":\"half past six\"}")
+                Arguments.of("06:30","{\"value\":\"half past six\"}"),
+                Arguments.of("00:00","{\"value\":\"twelve o'clock\"}"),
+                Arguments.of("22:45","{\"value\":\"quarter to eleven\"}"),
+                Arguments.of("10:15","{\"value\":\"quarter past ten\"}"),
+                Arguments.of("18:30","{\"value\":\"half past six\"}"),
+                Arguments.of("23:59","{\"value\":\"one to twelve\"}"),
+                Arguments.of("17:40","{\"value\":\"twenty to six\"}"),
+                Arguments.of("23:00","{\"value\":\"eleven o'clock\"}"),
+                Arguments.of("02:11","{\"value\":\"eleven past two\"}")
         );
     }
     private static Stream<Arguments> invalidTimesProvider() {
