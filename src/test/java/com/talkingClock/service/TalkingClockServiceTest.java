@@ -2,6 +2,7 @@ package com.talkingClock.service;
 
 
 
+import com.talkingClock.exception.InvalidTimeException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -10,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.talkingClock.service.TalkingClockService.convertTimeToWords;
+import static com.talkingClock.service.TalkingClockService.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,7 +25,7 @@ public class TalkingClockServiceTest {
         return Stream.of(
                 Arguments.of("10:00","ten o'clock"),
                 Arguments.of("05:15","quarter past five"),
-                Arguments.of("22:50","ten to eleven")
+                Arguments.of("10:50","ten to eleven")
         );
 
     }
@@ -43,8 +44,7 @@ public class TalkingClockServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideValidTimeCases")
-    public void covertTimeToWordsTestValid(String time , String expectedOutput)
-    {
+    public void covertTimeToWordsTestValid(String time , String expectedOutput) throws InvalidTimeException {
 
         assertEquals(expectedOutput, talkingClockService.convertTimeToWords(time));
     }
@@ -53,9 +53,9 @@ public class TalkingClockServiceTest {
     @MethodSource("provideInValidTimeCases")
     public void covertTimeToWordsTestInvalid(String time)
     {
-        assertThrows(InvalidTimeFormatException.class, () -> {
+        assertThrows(InvalidTimeException.class, () -> {
             talkingClockService.convertTimeToWords(time);
-            throw new InvalidTimeFormatException("Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59).");
+            throw new InvalidTimeException("Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59).");
         });
     }
 

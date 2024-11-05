@@ -12,12 +12,12 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.ErrorResponse;
+import com.talkingClock.models.ErrorResponse;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 /***
  * Test class for Controller. Testing the positive,negative and boundary conditions using Parameterized tests.
@@ -35,10 +35,11 @@ class TalkingClockIntegrationTest {
     @MethodSource("invalidTimesProvider")
     void testTalkingClockWhenInvalidTimeFormatIsSupplied(String time) {
         String url = createURLWithPort("/talking-clock?time=" + time);
-        ResponseEntity<ErrorResponse> response = restTemplate.getForEntity(url, ErrorResponse.class);
-
+        ResponseEntity<ErrorResponse> response = restTemplate.getForEntity(url,ErrorResponse.class);
+        String expectedResponse = "Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59).";
+        ErrorResponse errorResponse = response.getBody();
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59).", response.getBody().getMessage());
+        assertEquals(expectedResponse,errorResponse.getMessage());
     }
     @ParameterizedTest
     @MethodSource("validTimesProvider")
@@ -56,9 +57,9 @@ class TalkingClockIntegrationTest {
         return Stream.of(
 
                 Arguments.of("11:22","{\"value\":\"twenty two past eleven\"}"),
-                Arguments.of("15:45","{\"value\":\"quarter to four\"}"),
-                Arguments.of("23:00","{\"value\":\"eleven o'clock\"}"),
-                Arguments.of("18:30","{\"value\":\"half past six\"}")
+                Arguments.of("03:45","{\"value\":\"quarter to four\"}"),
+                Arguments.of("11:00","{\"value\":\"eleven o'clock\"}"),
+                Arguments.of("06:30","{\"value\":\"half past six\"}")
         );
     }
     private static Stream<Arguments> invalidTimesProvider() {
