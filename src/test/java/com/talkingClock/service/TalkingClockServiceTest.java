@@ -23,15 +23,15 @@ public class TalkingClockServiceTest {
 
     public static Stream<Arguments> provideValidTimeCases() {
         return Stream.of(
-                Arguments.of("10:00","ten o'clock"),
-                Arguments.of("05:15","quarter past five"),
-                Arguments.of("10:50","ten to eleven"),
-                Arguments.of("00:00","twelve o'clock"),
-                Arguments.of("17:15","quarter past five"),
-                Arguments.of("12:50","ten to one"),
-                Arguments.of("23:59","one to twelve"),
-                Arguments.of("08:30","half past eight"),
-                Arguments.of("10:50","ten to eleven")
+                Arguments.of("10:00","Ten o'Clock"),
+                Arguments.of("05:15","Quarter past Five"),
+                Arguments.of("10:50","Ten to Eleven"),
+                Arguments.of("00:00","Twelve o'Clock"),
+                Arguments.of("17:15","Quarter past Five"),
+                Arguments.of("12:50","Ten to One"),
+                Arguments.of("23:59","One to Twelve"),
+                Arguments.of("08:30","Half past Eight"),
+                Arguments.of("10:50","Ten to Eleven")
         );
 
     }

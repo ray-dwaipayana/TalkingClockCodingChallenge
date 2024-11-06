@@ -77,18 +77,18 @@ class TalkingClockIntegrationTest {
     private static Stream<Arguments> validTimesProvider() {
         return Stream.of(
 
-                Arguments.of("11:22","{\"value\":\"twenty two past eleven\"}"),
-                Arguments.of("03:45","{\"value\":\"quarter to four\"}"),
-                Arguments.of("11:00","{\"value\":\"eleven o'clock\"}"),
-                Arguments.of("06:30","{\"value\":\"half past six\"}"),
-                Arguments.of("00:00","{\"value\":\"twelve o'clock\"}"),
-                Arguments.of("22:45","{\"value\":\"quarter to eleven\"}"),
-                Arguments.of("10:15","{\"value\":\"quarter past ten\"}"),
-                Arguments.of("18:30","{\"value\":\"half past six\"}"),
-                Arguments.of("23:59","{\"value\":\"one to twelve\"}"),
-                Arguments.of("17:40","{\"value\":\"twenty to six\"}"),
-                Arguments.of("23:00","{\"value\":\"eleven o'clock\"}"),
-                Arguments.of("02:11","{\"value\":\"eleven past two\"}")
+                Arguments.of("11:22","{\"value\":\"Twenty Two past Eleven\"}"),
+                Arguments.of("03:45","{\"value\":\"Quarter to Four\"}"),
+                Arguments.of("11:00","{\"value\":\"Eleven o'Clock\"}"),
+                Arguments.of("06:30","{\"value\":\"Half past Six\"}"),
+                Arguments.of("00:00","{\"value\":\"Twelve o'Clock\"}"),
+                Arguments.of("22:45","{\"value\":\"Quarter to Eleven\"}"),
+                Arguments.of("10:15","{\"value\":\"Quarter past Ten\"}"),
+                Arguments.of("18:30","{\"value\":\"Half past Six\"}"),
+                Arguments.of("23:59","{\"value\":\"One to Twelve\"}"),
+                Arguments.of("17:40","{\"value\":\"Twenty to Six\"}"),
+                Arguments.of("23:00","{\"value\":\"Eleven o'Clock\"}"),
+                Arguments.of("02:11","{\"value\":\"Eleven past Two\"}")
         );
     }
     private static Stream<Arguments> invalidTimesProvider() {
