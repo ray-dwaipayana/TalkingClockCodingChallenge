@@ -15,4 +15,5 @@ To run the CLI Application
 
 Rest Example : 
 Successful REST Request - GET http://localhost:8080/talking-clock?time=10:30 Response - { "value": "half past ten" }
-Unsuccessful REST Request - GET http://localhost:8080/talking-clock?time=40:30 Response - { "Error": "Invalid Time Format - Please enter time in HH:MM format - valid values(00:00 - 23:59)" }
+Unsuccessful REST Request - GET http://localhost:8080/talking-clock?time=40:30 Response - { "status": 400,
+    "message": "Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59). }
