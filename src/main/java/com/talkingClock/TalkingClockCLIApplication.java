@@ -2,15 +2,12 @@ package com.talkingClock;
 
 import com.talkingClock.exception.InvalidTimeException;
 import com.talkingClock.service.TalkingClockService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 
@@ -20,7 +17,7 @@ import java.util.Scanner;
 public class TalkingClockCLIApplication  implements CommandLineRunner{
 
 
-private  final TalkingClockService talkingClockService = new TalkingClockService();
+private  final TalkingClockService talkingClockService = TalkingClockService.getInstance();
 
     @Override
     public void run(String... args) {

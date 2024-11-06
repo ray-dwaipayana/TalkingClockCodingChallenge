@@ -1,11 +1,11 @@
 package com.talkingClock.enums;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
+
+import lombok.Getter;
 import java.util.Arrays;
 
+@Getter
 public enum TalkingClockEnum {
     ZERO(0, ""),
     ONE(1, "One"),
@@ -43,14 +43,6 @@ public enum TalkingClockEnum {
     private int value;
     private String text;
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
-    }
-
     TalkingClockEnum(int value, String text) {
         this.value = value;
         this.text = text;
@@ -62,14 +54,6 @@ public enum TalkingClockEnum {
      * @return - Text value of the number passed
      */
 
-    /*
-    public static TalkingClockEnum toText(int number) {
-        return Arrays.stream(values())
-                .filter(value -> value.value == number)
-                .findFirst().orElse(null);
-    }
-
-     */
     public static String toText(int number) {
         return Arrays.stream(values())
                 .filter(value -> value.value == number)

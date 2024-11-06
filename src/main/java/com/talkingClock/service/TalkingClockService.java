@@ -14,6 +14,17 @@ public class TalkingClockService implements Clock{
     private static final String PAST = "past";
     private static final String TO = "to";
 
+    private TalkingClockService() {
+
+    }
+    private static final TalkingClockService INSTANCE = new TalkingClockService();
+
+    public static TalkingClockService getInstance() {
+        return INSTANCE;
+    }
+
+
+
     @Override
     public String convertTimeToWords(String time) throws InvalidTimeException {
         if(!TalkingClockUtil.validateTime(time)) {

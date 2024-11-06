@@ -1,23 +1,16 @@
 package com.talkingClock;
 
-import com.talkingClock.TalkingClockCLIApplication;
-import com.talkingClock.exception.InvalidTimeException;
+
 import com.talkingClock.service.TalkingClockService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -96,18 +89,6 @@ public class TalkingClockCLITest {
         talkingClockCLIApplication.processInput(inputTime);
         assertThat(output.getOut()).contains("Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59).");
     }
-
-/*
-        @Test
-        void testInvalidTime(CapturedOutput output) {
-            String inputTime = "qwqqwqe";
-            Exception ex = Assertions.assertThrows(InvalidTimeException.class,
-                    ()->{
-                talkingClockCLIApplication.processInput(inputTime);
-                    });
-            assertThat(ex.getMessage().contains("Invalid time format entered. Please provide a valid time in HH:mm format(00:00 - 23:59)."));
-        }
-*/
-    }
+}
 
 

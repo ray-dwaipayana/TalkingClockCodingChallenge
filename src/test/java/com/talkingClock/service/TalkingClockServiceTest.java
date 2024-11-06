@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.talkingClock.service.TalkingClockService.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TalkingClockServiceTest {
 
 
-    private final TalkingClockService talkingClockService = new TalkingClockService();
+    private final TalkingClockService talkingClockService = TalkingClockService.getInstance();
 
     public static Stream<Arguments> provideValidTimeCases() {
         return Stream.of(
